@@ -1,35 +1,52 @@
 ﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
+    Layout = "_LayoutRegister";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="header-text">
+                    <h2>@ViewData["Title"]</h2>
+                    <h4>¡Regístrate y disfruta de nuestro panel de administrador gratis!</h4>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="col-md-4 col-md-offset-4">
+                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                    <div class="card card-plain">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="content">
+                            <div class="form-group">
+                                <input type="email" placeholder="Your First Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Last Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Company" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Enter email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Password Confirmation" class="form-control">
+                            </div>
+                        </div>
+                        <div class="footer text-center">
+                            <button type="submit" class="btn btn-fill btn-danger btn-wd">Create Free Account</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-default">Register</button>
-        </form>
+        </div>
     </div>
 </div>
+
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
