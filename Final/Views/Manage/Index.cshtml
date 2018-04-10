@@ -2,44 +2,83 @@
 @{
     ViewData["Title"] = "Profile";
     ViewData.AddActivePage(ManageNavPages.Index);
+    Layout = "_LayoutAdmin";
 }
 
-<h4>@ViewData["Title"]</h4>
 @Html.Partial("_StatusMessage", Model.StatusMessage)
+
 <div class="row">
-    <div class="col-md-6">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+
+    <div class="col-lg-10 col-md-offset-1">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Edit Profile</h4>
             </div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                @if (Model.IsEmailConfirmed)
-                {
-                    <div class="input-group">
-                        <input asp-for="Email" class="form-control" />
-                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+            <div class="card-content">
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Company</label>
+                                <input type="text" class="form-control border-input" disabled placeholder="Company" value="Creative Code Inc.">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Username"></label>
+                                <input asp-for="Username" class="form-control border-input" placeholder="Username" disabled />
+                            </div>
+                        </div>
                     </div>
-                }
-                else
-                {
-                    <input asp-for="Email" class="form-control" />
-                    <button asp-action="SendVerificationEmail" class="btn btn-link">Send verification email</button>
-                }
-                <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control border-input" placeholder="Company" value="Chet">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control border-input" placeholder="Last Name" value="Faker">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Email"></label>
+                                @if (Model.IsEmailConfirmed)
+                                {
+                                <div class="input-group">
+                                    <input asp-for="Email" class="form-control border-input" placeholder="Email" />
+                                    <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                                </div>
+                                }
+                                else
+                                {
+                                
+                                    <input asp-for="Email" class="form-control border-input" placeholder="Email" />
+                                    <center><button asp-action="SendVerificationEmail" class="btn btn-sm btn-default" style="text-align: right;">Send verification email</button></center>
+                                }
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber"></label>
+                                <input asp-for="PhoneNumber" class="form-control border-input" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-default">Save</button>
-        </form>
+        </div>
     </div>
 </div>
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}

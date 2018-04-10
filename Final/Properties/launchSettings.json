@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/Final",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:52758/",
       "sslPort": 44318
@@ -23,6 +27,12 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:52759/"
+    },
+    "Freddyerf": {
+      "commandName": "IIS"
+    },
+    "new": {
+      "commandName": "IIS"
     }
   }
 }

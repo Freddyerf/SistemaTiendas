@@ -19,26 +19,32 @@
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="content">
                             <div class="form-group">
-                                <input type="email" placeholder="Your First Name" class="form-control">
+                                <input asp-for="Name" class="form-control" placeholder="Your First Name" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="Your Last Name" class="form-control">
+                                <input asp-for="LastName" class="form-control" placeholder="Your Last Name" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="Company" class="form-control">
+                                <input asp-for="Company" class="form-control" placeholder="Company"/>
+                                <span asp-validation-for="Company" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="Enter email" class="form-control">
+                                <input asp-for="Email" class="form-control" placeholder="Enter your Email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input type="password" placeholder="Password" class="form-control">
+                                <input asp-for="Password" class="form-control" placeholder="Password"/>
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input type="password" placeholder="Password Confirmation" class="form-control">
+                                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm your password"/>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="footer text-center">
-                            <button type="submit" class="btn btn-fill btn-danger btn-wd">Create Free Account</button>
+                            <button type="submit" class="btn btn-fill btn-social btn-wd">Create Free Account</button>
                         </div>
                     </div>
                 </form>
@@ -49,5 +55,5 @@
 
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("_ScriptsPartial")
 }
