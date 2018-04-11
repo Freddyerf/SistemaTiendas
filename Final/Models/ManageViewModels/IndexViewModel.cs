@@ -12,6 +12,13 @@ namespace Final.Models.ManageViewModels
 
         public bool IsEmailConfirmed { get; set; }
 
+        public string Name { get; set; }
+
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
+        public string Company { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }

@@ -11,9 +11,10 @@ using System;
 namespace Final.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180411191115_employees")]
+    partial class employees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,6 +37,8 @@ namespace Final.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<int?>("EmployeeId");
 
                     b.Property<string>("LastName");
 
@@ -66,6 +69,8 @@ namespace Final.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -82,7 +87,7 @@ namespace Final.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApplicationUserId");
+                    b.Property<int>("ApllicationUserId");
 
                     b.Property<string>("LastName");
 
@@ -91,10 +96,6 @@ namespace Final.Data.Migrations
                     b.Property<decimal>("Salary");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique()
-                        .HasFilter("[ApplicationUserId] IS NOT NULL");
 
                     b.ToTable("Employees");
                 });
@@ -227,11 +228,11 @@ namespace Final.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Final.Models.Entities.Employee", b =>
+            modelBuilder.Entity("Final.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("Final.Models.ApplicationUser")
-                        .WithOne("Employee")
-                        .HasForeignKey("Final.Models.Entities.Employee", "ApplicationUserId");
+                    b.HasOne("Final.Models.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

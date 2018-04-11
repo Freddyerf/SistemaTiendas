@@ -1,18 +1,18 @@
 ﻿@model IndexViewModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Cashier";
     ViewData.AddActivePage(ManageNavPages.Index);
     Layout = "_LayoutAdmin";
 }
 
-@Html.Partial("_StatusMessage", Model.StatusMessage)
+
 
 <div class="row">
 
     <div class="col-lg-10 col-md-offset-1">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Edit Profile</h4>
+                <h4 class="card-title">New purchase order</h4>
             </div>
             <div class="card-content">
                 <form method="post">
@@ -42,25 +42,6 @@
                             <div class="form-group">
                                 <label asp-for="LastName"></label>
                                 <input asp-for="LastName" class="form-control border-input" placeholder="Apellido" />
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label asp-for="Email"></label>
-                                @if (Model.IsEmailConfirmed)
-                                {
-                                    <div class="input-group">
-                                        <input asp-for="Email" class="form-control border-input" placeholder="Email" />
-                                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
-                                    </div>
-                                }
-                                else
-                                {
-
-                                    <input asp-for="Email" class="form-control border-input" placeholder="Email" />
-                                    <center><button asp-action="SendVerificationEmail" class="btn btn-sm btn-default" style="text-align: right;">Send verification email</button></center>
-                                }
-                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

@@ -4,27 +4,15 @@
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
 <!DOCTYPE html>
-<html>
+<HTML lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" sizes="96x96" href="../../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>@ViewData["Title"]</title>
-
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
-
     <!-- Canonical SEO -->
+    <link rel="canonical" href="http://www.creative-tim.com/product/paper-dashboard-pro" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -36,10 +24,14 @@
     <link href="../../assets/css/demo.css" rel="stylesheet" />
 
     <!--  Fonts and icons     -->
-    <link href="../../bootstrapcdn/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/bootstrapcdn/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="../../assets/css/themify-icons.css" rel="stylesheet">
 
+    <link rel='stylesheet' type='text/css' href='~/assets/css/style.css' />
+    <link rel='stylesheet' type='text/css' href='~/assets/css/print.css' media="print" />
+    <script type='text/javascript' src='~/assets/js/jquery-1.3.2.min.js'></script>
+    <script type='text/javascript' src='~/assets/js/example.js'></script>
 </head>
 <body>
     <div class="wrapper">
@@ -49,11 +41,11 @@
                 Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
             -->
             <div class="logo">
-                <a href="http://www.creative-tim.com/" class="simple-text logo-mini">
-                    CT
+                <a asp-area="" asp-controller="Manage" asp-action="Overview" class="simple-text logo-mini">
+                    SS
                 </a>
-                <a href="http://www.creative-tim.com/" class="simple-text logo-normal">
-                    Creative Tim
+                <a asp-area="" asp-controller="Manage" asp-action="Overview" class="simple-text logo-normal">
+                    Simple Store
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -62,7 +54,7 @@
                         <img src="../../assets/img/faces/face-2.jpg" />
                     </div>
                     <div class="info">
-                        <a data-toggle="collapse" href="#collapseExample">
+                        <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <span>
                                 Chet Faker
                                 <b class="caret"></b>
@@ -88,7 +80,7 @@
                                     <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)">
                                         <a asp-action="ExternalLogins">
                                             <span class="sidebar-mini">EL</span>
-                                            <span class="sidebar-normal">External logins</span>       
+                                            <span class="sidebar-normal">External logins</span>
                                         </a>
                                     </li>
                                 }
@@ -98,29 +90,29 @@
                                         <span class="sidebar-normal">Two-Factor Authentication</span>
                                     </a>
                                 </li>
-                            </ul>                   
+                            </ul>
                         </div>
                     </div>
                 </div>
                 <ul class="nav">
-                    <li>
-                        <a data-toggle="collapse" href="#dashboardOverview">
+                    <li class="@ViewData["Dashboard"]">
+                        <a data-toggle="collapse" href="#dashboardOverview" aria-expanded="@ViewData["DashboardExpanded"]">
                             <i class="ti-panel"></i>
                             <p>
                                 Dashboard
                                 <b class="caret"></b>
                             </p>
                         </a>
-                        <div class="collapse" id="dashboardOverview">
+                        <div class="collapse @ViewData["CollapsedIn"]" id="dashboardOverview">
                             <ul class="nav">
-                                <li>
-                                    <a href="../dashboard/overview.html">
+                                <li class="@ViewData["Overview"]">
+                                    <a asp-area="" asp-controller="Manage" asp-action="Overview" asp-fragment="">
                                         <span class="sidebar-mini">O</span>
                                         <span class="sidebar-normal">Overview</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="../dashboard/stats.html">
+                                <li class="@ViewData["Stats"]">
+                                    <a asp-area="" asp-controller="Manage" asp-action="Stats" asp-fragment="">
                                         <span class="sidebar-mini">S</span>
                                         <span class="sidebar-normal">Stats</span>
                                     </a>
@@ -128,60 +120,11 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <a data-toggle="collapse" href="#componentsExamples">
+                    <li class="@ViewData["Stock"]">
+                        <a asp-area="" asp-controller="Manage" asp-action="Stock" asp-fragment="">
                             <i class="ti-package"></i>
-                            <p>
-                                Stock
-                                <b class="caret"></b>
-                            </p>
+                            <p>Stock</p>
                         </a>
-                        <div class="collapse" id="componentsExamples">
-                            <ul class="nav">
-                                <li>
-                                    <a href="../components/buttons.html">
-                                        <span class="sidebar-mini">B</span>
-                                        <span class="sidebar-normal">Buttons</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../components/grid.html">
-                                        <span class="sidebar-mini">GS</span>
-                                        <span class="sidebar-normal">Grid System</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../components/panels.html">
-                                        <span class="sidebar-mini">P</span>
-                                        <span class="sidebar-normal">Panels</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../components/sweet-alert.html">
-                                        <span class="sidebar-mini">SA</span>
-                                        <span class="sidebar-normal">Sweet Alert</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../components/notifications.html">
-                                        <span class="sidebar-mini">N</span>
-                                        <span class="sidebar-normal">Notifications</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../components/icons.html">
-                                        <span class="sidebar-mini">I</span>
-                                        <span class="sidebar-normal">Icons</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../components/typography.html">
-                                        <span class="sidebar-mini"><i class="ti-panel"></i></span>
-                                        <span class="sidebar-normal">Typography</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li>
                         <a data-toggle="collapse" href="#formsExamples">
@@ -194,9 +137,9 @@
                         <div class="collapse" id="formsExamples">
                             <ul class="nav">
                                 <li>
-                                    <a href="../forms/regular.html">
-                                        <span class="sidebar-mini">Rf</span>
-                                        <span class="sidebar-normal">Regular Forms</span>
+                                    <a asp-area="" asp-controller="Manage" asp-action="Cashier" asp-fragment="">
+                                        <span class="sidebar-mini">$$</span>
+                                        <span class="sidebar-normal">Cashier</span>
                                     </a>
                                 </li>
                                 <li>
@@ -220,7 +163,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
+                    <li class="@ViewData["Employee"]">
                         <a data-toggle="collapse" href="#tablesExamples">
                             <i class="ti-view-list-alt"></i>
                             <p>
@@ -237,21 +180,9 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../tables/extended.html">
-                                        <span class="sidebar-mini">ET</span>
-                                        <span class="sidebar-normal">Extended Tables</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../tables/bootstrap-table.html">
+                                    <a asp-area="" asp-controller="Manage" asp-action="Employee" asp-fragment="">
                                         <span class="sidebar-mini">EL</span>
                                         <span class="sidebar-normal">Employee list</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../tables/datatables.net.html">
-                                        <span class="sidebar-mini">DT</span>
-                                        <span class="sidebar-normal">DataTables.net</span>
                                     </a>
                                 </li>
                             </ul>
@@ -339,89 +270,13 @@
                 <div class="container-fluid">
                     <div class="copyright pull-right">
                         &copy;
-                        <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com/">Freddyerf</a>
+                        <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="https://github.com/Freddyerf" target="_blank">Freddyerf</a>
                     </div>
                 </div>
             </footer>
         </div>
     </div>
-
-
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-            e</script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-
-    <!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
-    <script src="../../assets/js/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script src="../../assets/js/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="../../assets/js/perfect-scrollbar.min.js" type="text/javascript"></script>
-    <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <!--  Forms Validations Plugin -->
-    <script src="../../assets/js/jquery.validate.min.js"></script>
-    <!-- Promise Library for SweetAlert2 working on IE -->
-    <script src="../../assets/js/es6-promise-auto.min.js"></script>
-    <!--  Plugin for Date Time Picker and Full Calendar Plugin-->
-    <script src="../../assets/js/moment.min.js"></script>
-    <!--  Date Time Picker Plugin is included in this js file -->
-    <script src="../../assets/js/bootstrap-datetimepicker.js"></script>
-    <!--  Select Picker Plugin -->
-    <script src="../../assets/js/bootstrap-selectpicker.js"></script>
-    <!--  Switch and Tags Input Plugins -->
-    <script src="../../assets/js/bootstrap-switch-tags.js"></script>
-    <!-- Circle Percentage-chart -->
-    <script src="../../assets/js/jquery.easypiechart.min.js"></script>
-    <!--  Charts Plugin -->
-    <script src="../../assets/js/chartist.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="../../assets/js/bootstrap-notify.js"></script>
-    <!-- Sweet Alert 2 plugin -->
-    <script src="../../assets/js/sweetalert2.js"></script>
-    <!-- Vector Map plugin -->
-    <script src="../../assets/js/jquery-jvectormap.js"></script>
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFPQibxeDaLIUHsC6_KqDdFaUdhrbhZ3M"></script>
-    <!-- Wizard Plugin    -->
-    <script src="../../assets/js/jquery.bootstrap.wizard.min.js"></script>
-    <!--  Bootstrap Table Plugin    -->
-    <script src="../../assets/js/bootstrap-table.js"></script>
-    <!--  Plugin for DataTables.net  -->
-    <script src="../../assets/js/jquery.datatables.js"></script>
-    <!--  Full Calendar Plugin    -->
-    <script src="../../assets/js/fullcalendar.min.js"></script>
-    <!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
-    <script src="../../assets/js/paper-dashboard23cd.js?v=1.2.1"></script>
-    <!--   Sharrre Library    -->
-    <script src="../../assets/js/jquery.sharrre.js"></script>
-    <!-- Paper Dashboard PRO DEMO methods, don't include it in your project! -->
-    <script src="../../assets/js/demo.js"></script>
-    <script type="text/javascript">
-        $().ready(function () {
-            demo.checkFullPageBackgroundImage();
-
-            setTimeout(function () {
-                // after 1000 ms we add the class animated to the login/register card
-                $('.card').removeClass('card-hidden');
-            }, 700)
-        });
-    </script>
-
     @RenderSection("Scripts", required: false)
 </body>
-</html>
+
+</HTML>

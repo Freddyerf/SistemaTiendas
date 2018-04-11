@@ -25,22 +25,24 @@ namespace Final.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
-
+        private readonly IDataTray _dataTray;
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
-
+        
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          IDataTray dataTray)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _dataTray = dataTray;
         }
 
         [TempData]
@@ -59,6 +61,9 @@ namespace Final.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
+                Name = user.Name,
+                LastName = user.LastName,
+                Company = user.Company,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
@@ -92,6 +97,38 @@ namespace Final.Controllers
                 }
             }
 
+            var name = user.Name;
+            if (model.Name != name)
+            {
+                /*var setEmaiResult = await _userManager.UpdateAsync()
+                if (!setEmailResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                }*/
+                user.Name = model.Name;
+            }
+
+            var lastName = user.LastName;
+            if (model.LastName != lastName)
+            {
+                /*  var setEmailResult = await _userManager.SetEmailAsync(user, model.LastName);
+                  if (!setEmailResult.Succeeded)
+                  {
+                      throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                  }*/
+                user.LastName = model.LastName;
+            }
+
+            var company = user.Company;
+            if (model.Company != company)
+            {
+                /* var setEmailResult = await _userManager.SetEmailAsync(user, model.Company);
+                 if (!setEmailResult.Succeeded)
+                 {
+                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                 }*/
+            }
+
             var phoneNumber = user.PhoneNumber;
             if (model.PhoneNumber != phoneNumber)
             {
@@ -102,7 +139,8 @@ namespace Final.Controllers
                 }
             }
 
-            StatusMessage = "Your profile has been updated";
+            var ultimateResult = await _userManager.UpdateAsync(user);
+            StatusMessage = "Your profile has been updated lol";
             return RedirectToAction(nameof(Index));
         }
 
@@ -489,6 +527,39 @@ namespace Final.Controllers
             var model = new ShowRecoveryCodesViewModel { RecoveryCodes = recoveryCodes.ToArray() };
 
             return View(nameof(ShowRecoveryCodes), model);
+        }
+
+        public IActionResult Overview()
+        {
+            return View();
+        }
+
+        public IActionResult Stats()
+        {
+            return View();
+        }
+
+        public IActionResult Stock()
+        {
+            var model = new StockViewModel
+            {
+                Products = _dataTray.GetProducts()
+            };
+            return View(model);
+        }
+
+        public IActionResult Employee()
+        {
+            var model = new EmployeeViewModel
+            {
+                Employees = _dataTray.GetEmployees()
+            };
+            return View(model);
+        }
+
+        public IActionResult Cashier()
+        {
+            return View();
         }
 
         #region Helpers

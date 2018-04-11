@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Final.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace Final.Models
@@ -12,5 +13,6 @@ namespace Final.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Company { get; set; }
+        public Employee Employee { get; set; }
     }
 }

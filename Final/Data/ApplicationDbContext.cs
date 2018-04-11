@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Final.Models;
+using Final.Models.Entities;
 
 namespace Final.Data
 {
@@ -22,5 +23,8 @@ namespace Final.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

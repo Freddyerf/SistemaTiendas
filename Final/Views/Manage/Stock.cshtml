@@ -1,0 +1,51 @@
+﻿@model StockViewModel
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Stock";
+    ViewData["Stock"] = "active";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-content">
+                <div class="toolbar">
+                    <!--Here you can write extra buttons/actions for the toolbar-->
+                </div>
+                <table id="bootstrap-table" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                    <thead>
+                        <tr>
+                            
+                            <th data-field="id" class="text-center">ID</th>
+                            <th data-field="name" data-sortable="true">Name</th>
+                            <th data-field="description">Description</th>
+                            <th data-field="category" data-sortable="true">Category</th>
+                            <th data-field="price" data-sortable="true">Price</th>
+                            <th data-field="existence" data-sortable="true">Existence</th>
+                            <th data-field="actions" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Products)
+                        {
+                        <tr>
+                           
+                            <td> @item.Id </td>
+                            <td> @item.Name </td>
+                            <td> @item.Description </td>
+                            <td> @item.Category </td>
+                            <td> @item.Price </td>
+                            <td> @item.Existence </td>
+                            <td></td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div><!--  end card  -->
+    </div> <!-- end col-md-12 -->
+</div> <!-- end row -->
+
+@section Scripts {
+    @await Html.PartialAsync("_ManageScriptsPartial")
+}
