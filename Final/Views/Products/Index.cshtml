@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Final.Models.Entities.Product>
+
+@{
+    ViewData["Title"] = "Stock";
+    ViewData["Stock"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-content">
+                <div class="toolbar">
+                    <!--Here you can write extra buttons/actions for the toolbar-->
+                </div>
+                <table id="bootstrap-table" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                    <thead>
+                        <tr>
+
+                            <th data-field="id" class="text-center">@Html.DisplayNameFor(model => model.Id)</th>
+                            <th data-field="name" data-sortable="true">@Html.DisplayNameFor(model => model.Name)</th>
+                            <th data-field="description">@Html.DisplayNameFor(model => model.Description)</th>
+                            <th data-field="category" data-sortable="true">@Html.DisplayNameFor(model => model.Category)</th>
+                            <th data-field="price" data-sortable="true">@Html.DisplayNameFor(model => model.Price)</th>
+                            <th data-field="existence" data-sortable="true">@Html.DisplayNameFor(model => model.Existence)</th>
+                            <th data-field="actions" class="td-actions text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Id) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Name) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Description) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Category) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Price) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Existence) </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-simple btn-info btn-icon table-action view"><i class="ti-image"></i></a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-simple btn-warning btn-icon table-action edit"><i class="ti-pencil-alt"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div><!--  end card  -->
+    </div> <!-- end col-md-12 -->
+</div> <!-- end row -->
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@section Scripts {
+    @await Html.PartialAsync("_ManageScriptsPartial")
+}
