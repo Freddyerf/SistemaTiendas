@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Final.Data;
 using Final.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Final.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -149,5 +151,7 @@ namespace Final.Controllers
         {
             return _context.Employees.Any(e => e.Id == id);
         }
+
+
     }
 }

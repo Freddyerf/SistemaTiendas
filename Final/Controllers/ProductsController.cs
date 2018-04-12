@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Final.Data;
 using Final.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Final.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -60,8 +62,10 @@ namespace Final.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+                ViewBag.Status = "Your product has been succesfully added";
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Status = "Your product has been succesfully added";
             return View(product);
         }
 

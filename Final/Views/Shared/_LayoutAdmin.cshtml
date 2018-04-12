@@ -3,6 +3,10 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
+@inject UserManager<ApplicationUser> UserManager
+@{ 
+    var user = await UserManager.GetUserAsync(User);
+}
 <!DOCTYPE html>
 <HTML lang="en">
 <head>
@@ -27,6 +31,7 @@
     <link href="~/bootstrapcdn/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="../../assets/css/themify-icons.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="wrapper">
@@ -37,12 +42,12 @@
             -->
             <div class="logo">
                 <a asp-area="" asp-controller="Manage" asp-action="Overview" class="simple-text logo-mini">
-                    SS
+                    @user.Company.Substring(0,2)
                 </a>
                 <a asp-area="" asp-controller="Manage" asp-action="Overview" class="simple-text logo-normal">
-                    Simple Store
+                    @user.Company
                 </a>
-            </div>
+            </div> 
             <div class="sidebar-wrapper">
                 <div class="user">
                     <div class="photo">
@@ -51,7 +56,7 @@
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <span>
-                                Chet Faker
+                                @user.Name @user.LastName
                                 <b class="caret"></b>
                             </span>
                         </a>
