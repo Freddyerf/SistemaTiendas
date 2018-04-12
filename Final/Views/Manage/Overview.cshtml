@@ -1,4 +1,5 @@
-﻿@{
+﻿@model OverviewViewModel
+@{
     /*
     ViewData.AddActivePage(ManageNavPages.ChangePassword);*/
     Layout = "_LayoutAdmin";
@@ -10,100 +11,83 @@
 }
 
 <div class="row">
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-8">
         <div class="card">
             <div class="card-content">
                 <div class="row">
-                    <div class="col-xs-7">
-                        <div class="numbers pull-left">
-                            $34,657
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-warning text-center">
+                            <i class="ti-package"></i>
                         </div>
                     </div>
-                    <div class="col-xs-5">
-                        <div class="pull-right">
-                            <span class="label label-success">
-                                +18%
-                            </span>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Total productos</p>
+                            @Model.CountProducts
                         </div>
                     </div>
                 </div>
-                <h6 class="big-title">total earnings <span class="text-muted">in last</span> ten <span class="text-muted">quarters</span></h6>
-                <div id="chartTotalEarnings"></div>
             </div>
             <div class="card-footer">
-                <hr>
-                <div class="footer-title">Financial Statistics</div>
-                <div class="pull-right">
-                    <button class="btn btn-info btn-fill btn-icon btn-sm">
-                        <i class="ti-plus"></i>
-                    </button>
+                <hr />
+                <div class="stats">
+                    <i class="ti-reload"></i> Updated now
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-8">
         <div class="card">
             <div class="card-content">
                 <div class="row">
-                    <div class="col-xs-7">
-                        <div class="numbers pull-left">
-                            169
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-success text-center">
+                            <i class="ti-wallet"></i>
                         </div>
                     </div>
-                    <div class="col-xs-5">
-                        <div class="pull-right">
-                            <span class="label label-danger">
-                                -14%
-                            </span>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Total en Nóminas mensual</p>
+                            $@Model.SumSalary
                         </div>
                     </div>
                 </div>
-                <h6 class="big-title">total subscriptions <span class="text-muted">in last</span> 7 days</h6>
-                <div id="chartTotalSubscriptions"></div>
             </div>
             <div class="card-footer">
-                <hr>
-                <div class="footer-title">View all members</div>
-                <div class="pull-right">
-                    <button class="btn btn-default btn-fill btn-icon btn-sm">
-                        <i class="ti-angle-right"></i>
-                    </button>
+                <hr />
+                <div class="stats">
+                    <i class="ti-calendar"></i> Last day
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-sm-6">
+    <div class="col-lg-4 col-sm-8">
         <div class="card">
             <div class="card-content">
                 <div class="row">
-                    <div class="col-xs-7">
-                        <div class="numbers pull-left">
-                            8,960
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-danger text-center">
+                            <i class="ti-pulse"></i>
                         </div>
                     </div>
-                    <div class="col-xs-5">
-                        <div class="pull-right">
-                            <span class="label label-warning">
-                                ~51%
-                            </span>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Errors</p>
+                            23
                         </div>
                     </div>
                 </div>
-                <h6 class="big-title">total downloads <span class="text-muted">in last</span> 6 years</h6>
-                <div id="chartTotalDownloads"></div>
             </div>
             <div class="card-footer">
-                <hr>
-                <div class="footer-title">View more details</div>
-                <div class="pull-right">
-                    <button class="btn btn-success btn-fill btn-icon btn-sm">
-                        <i class="ti-info"></i>
-                    </button>
+                <hr />
+                <div class="stats">
+                    <i class="ti-timer"></i> In the last hour
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-lg-3 col-sm-6">
         <div class="card card-circle-chart" data-background-color="blue">

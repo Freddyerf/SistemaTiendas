@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Final.Models;
 using Final.Models.ManageViewModels;
 using Final.Services;
+using Final.Data;
 
 namespace Final.Controllers
 {
@@ -20,6 +21,7 @@ namespace Final.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -28,8 +30,9 @@ namespace Final.Controllers
         private readonly IDataTray _dataTray;
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
-        
+
         public ManageController(
+          ApplicationDbContext context,
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
@@ -37,6 +40,7 @@ namespace Final.Controllers
           UrlEncoder urlEncoder,
           IDataTray dataTray)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -531,7 +535,12 @@ namespace Final.Controllers
 
         public IActionResult Overview()
         {
-            return View();
+            var model = new OverviewViewModel
+            {
+                CountProducts = _context.Products.Count() * _context.Products.Sum(p => p.Existence),
+                SumSalary = _context.Employees.Sum(e=> e.Salary)
+            };
+            return View(model);
         }
 
         public IActionResult Stats()

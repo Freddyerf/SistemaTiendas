@@ -51,7 +51,7 @@
             <div class="sidebar-wrapper">
                 <div class="user">
                     <div class="photo">
-                        <img src="../../assets/img/faces/face-2.jpg" />
+                        <img src="~/assets/img/faces/surprised.jpg" />
                     </div>
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -164,20 +164,8 @@
                                 </li>
                                 <li>
                                     <a href="../forms/extended.html">
-                                        <span class="sidebar-mini">Ef</span>
-                                        <span class="sidebar-normal">Extended Forms</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../forms/validation.html">
-                                        <span class="sidebar-mini">Vf</span>
-                                        <span class="sidebar-normal">Validation Forms</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../forms/wizard.html">
-                                        <span class="sidebar-mini">W</span>
-                                        <span class="sidebar-normal">Wizard</span>
+                                        <span class="sidebar-mini">RC</span>
+                                        <span class="sidebar-normal">Receipts</span>
                                     </a>
                                 </li>
                             </ul>
@@ -215,15 +203,9 @@
                         </div>
                     </li>
                     <li>
-                        <a href="../calendar.html">
+                        <a href="#">
                             <i class="ti-calendar"></i>
                             <p>Calendar</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../charts.html">
-                            <i class="ti-bar-chart-alt"></i>
-                            <p>Charts</p>
                         </a>
                     </li>
                 </ul>
@@ -245,45 +227,13 @@
                         <a class="navbar-brand" href="#userpage">@ViewData["Title"]</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        <form class="navbar-form navbar-left navbar-search-form" role="search">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <input type="text" value="" class="form-control" placeholder="Search...">
-                            </div>
+                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <button type="submit" class="btn btn-simple btn-wd" style="margin:19px 4px;">Log out <i class="fa ti-power-off" style="padding-bottom: 3px;"></i></button>
+                                </li>
+                            </ul>
                         </form>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="#stats" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
-                                    <i class="ti-panel"></i>
-                                    <p>Stats</p>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#notifications" class="dropdown-toggle btn-rotate" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <span class="notification">5</span>
-                                    <p class="hidden-md hidden-lg">
-                                        Notifications
-                                        <b class="caret"></b>
-                                    </p>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#not1">Notification 1</a></li>
-                                    <li><a href="#not2">Notification 2</a></li>
-                                    <li><a href="#not3">Notification 3</a></li>
-                                    <li><a href="#not4">Notification 4</a></li>
-                                    <li><a href="#another">Another notification</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#settings" class="btn-rotate">
-                                    <i class="ti-settings"></i>
-                                    <p class="hidden-md hidden-lg">
-                                        Settings
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </nav>
