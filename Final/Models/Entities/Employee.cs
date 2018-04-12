@@ -11,6 +11,8 @@ namespace Final.Models.Entities
         public string Name { get; set; }
         public string LastName { get; set; }
         public decimal Salary { get; set; }
-        public string ApplicationUserId { get; set; }
+        public string Position { get; set; }
+        public string Telephone { get; set; }
+        public string Cedula { get; set; }
     }
 }

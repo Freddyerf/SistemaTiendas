@@ -59,13 +59,13 @@
                         <div class="collapse" id="collapseExample">
                             <ul class="nav">
                                 <li class="@ManageNavPages.IndexNavClass(ViewContext)">
-                                    <a asp-action="Index">
+                                    <a asp-controller="Manage" asp-action="Index">
                                         <span class="sidebar-mini">Pr</span>
                                         <span class="sidebar-normal">Profile</span>
                                     </a>
                                 </li>
                                 <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)">
-                                    <a asp-action="ChangePassword">
+                                    <a asp-controller="Manage" asp-action="ChangePassword">
                                         <span class="sidebar-mini">Pw</span>
                                         <span class="sidebar-normal">Password</span>
                                     </a>
@@ -73,14 +73,14 @@
                                 @if (hasExternalLogins)
                                 {
                                     <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)">
-                                        <a asp-action="ExternalLogins">
+                                        <a asp-controller="Manage" asp-action="ExternalLogins">
                                             <span class="sidebar-mini">EL</span>
                                             <span class="sidebar-normal">External logins</span>
                                         </a>
                                     </li>
                                 }
                                 <li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)">
-                                    <a asp-action="TwoFactorAuthentication">
+                                    <a asp-controller="Manage" asp-action="TwoFactorAuthentication">
                                         <span class="sidebar-mini">2F</span>
                                         <span class="sidebar-normal">Two-Factor Authentication</span>
                                     </a>
@@ -98,7 +98,7 @@
                                 <b class="caret"></b>
                             </p>
                         </a>
-                        <div class="collapse @ViewData["CollapsedIn"]" id="dashboardOverview">
+                        <div class="collapse @ViewData["DashboardCollapsedIn"]" id="dashboardOverview">
                             <ul class="nav">
                                 <li class="@ViewData["Overview"]">
                                     <a asp-area="" asp-controller="Manage" asp-action="Overview" asp-fragment="">
@@ -116,10 +116,30 @@
                         </div>
                     </li>
                     <li class="@ViewData["Stock"]">
-                        <a asp-area="" asp-controller="Manage" asp-action="Stock" asp-fragment="">
+                        <a data-toggle="collapse" href="#stockExamples" aria-expanded="@ViewData["StockExpanded"]">
                             <i class="ti-package"></i>
-                            <p>Stock</p>
+                            <p>
+                                Stock
+                                <b class="caret"></b>
+                            </p>
+
                         </a>
+                        <div class="collapse @ViewData["StockCollapsedIn"]" id="stockExamples">
+                            <ul class="nav">
+                                <li class="@ViewData["StockList"]">
+                                    <a asp-area="" asp-controller="Products" asp-action="Index" asp-fragment="">
+                                        <span class="sidebar-mini">IN</span>
+                                        <span class="sidebar-normal">Inventary</span>
+                                    </a>
+                                </li>
+                                <li class="@ViewData["StockCreate"]">
+                                    <a asp-area="" asp-controller="Products" asp-action="Create" asp-fragment="">
+                                        <span class="sidebar-mini">CP</span>
+                                        <span class="sidebar-normal">Create Product</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li>
                         <a data-toggle="collapse" href="#formsExamples">
@@ -159,25 +179,31 @@
                         </div>
                     </li>
                     <li class="@ViewData["Employee"]">
-                        <a data-toggle="collapse" href="#tablesExamples">
+                        <a data-toggle="collapse" href="#tablesExamples" aria-expanded="@ViewData["EmployeeExpanded"]">
                             <i class="ti-view-list-alt"></i>
                             <p>
                                 Employees
                                 <b class="caret"></b>
                             </p>
                         </a>
-                        <div class="collapse" id="tablesExamples">
+                        <div class="collapse @ViewData["EmployeeCollapsedIn"]" id="tablesExamples">
                             <ul class="nav">
-                                <li>
+                                <li class="">
                                     <a href="../tables/regular.html">
                                         <span class="sidebar-mini">PS</span>
                                         <span class="sidebar-normal">Paysheet</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a asp-area="" asp-controller="Manage" asp-action="Employee" asp-fragment="">
+                                <li class="@ViewData["EmployeeList"]">
+                                    <a asp-area="" asp-controller="Employees" asp-action="Index" asp-fragment="">
                                         <span class="sidebar-mini">EL</span>
                                         <span class="sidebar-normal">Employee list</span>
+                                    </a>
+                                </li>
+                                <li class="@ViewData["EmployeeCreate"]">
+                                    <a asp-area="" asp-controller="Employees" asp-action="Create" asp-fragment="">
+                                        <span class="sidebar-mini">CE</span>
+                                        <span class="sidebar-normal">Create employee</span>
                                     </a>
                                 </li>
                             </ul>

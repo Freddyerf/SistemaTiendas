@@ -2,6 +2,10 @@
 
 @{
     ViewData["Title"] = "Create";
+    ViewData["Stock"] = "active";
+    ViewData["StockCreate"] = "active";
+    ViewData["StockExpanded"] = "true";
+    ViewData["StockCollapsedIn"] = "in";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -64,10 +68,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        @await Html.PartialAsync("_ManageScriptsPartial")
+        }
 }

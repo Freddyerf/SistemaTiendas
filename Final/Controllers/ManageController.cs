@@ -548,15 +548,6 @@ namespace Final.Controllers
             return View(model);
         }
 
-        public IActionResult Employee()
-        {
-            var model = new EmployeeViewModel
-            {
-                Employees = _dataTray.GetEmployees()
-            };
-            return View(model);
-        }
-
         public IActionResult Cashier()
         {
             return View();

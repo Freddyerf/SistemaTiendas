@@ -1,0 +1,55 @@
+﻿@model Final.Models.Entities.Employee
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cedula)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

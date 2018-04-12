@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Final.Models.Entities.Product>
+﻿@model IEnumerable<Final.Models.Entities.Employee>
 
 @{
-    ViewData["Title"] = "Stock";
-    ViewData["Stock"] = "active";
-    ViewData["StockList"] = "active";
-    ViewData["StockExpanded"] = "true";
-    ViewData["StockCollapsedIn"] = "in";
+    ViewData["Title"] = "Employees";
+    ViewData["Employee"] = "active";
+    ViewData["EmployeeList"] = "active";
+    ViewData["EmployeeExpanded"] = "true";
+    ViewData["EmployeeCollapsedIn"] = "in";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -20,12 +20,12 @@
                     <thead>
                         <tr>
 
-                            <th data-field="id" class="text-center">@Html.DisplayNameFor(model => model.Id)</th>
+                            <th data-field="cedula" class="text-center">@Html.DisplayNameFor(model => model.Cedula)</th>
                             <th data-field="name" data-sortable="true">@Html.DisplayNameFor(model => model.Name)</th>
-                            <th data-field="description">@Html.DisplayNameFor(model => model.Description)</th>
-                            <th data-field="category" data-sortable="true">@Html.DisplayNameFor(model => model.Category)</th>
-                            <th data-field="price" data-sortable="true">@Html.DisplayNameFor(model => model.Price)</th>
-                            <th data-field="existence" data-sortable="true">@Html.DisplayNameFor(model => model.Existence)</th>
+                            <th data-field="lastName" data-sortable="true">@Html.DisplayNameFor(model => model.LastName)</th>
+                            <th data-field="salary" data-sortable="true">@Html.DisplayNameFor(model => model.Salary)</th>
+                            <th data-field="position" data-sortable="true">@Html.DisplayNameFor(model => model.Position)</th>
+                            <th data-field="telephone" data-sortable="true">@Html.DisplayNameFor(model => model.Telephone)</th>
                             <th data-field="actions" class="td-actions text-right">Actions</th>
                         </tr>
                     </thead>
@@ -33,12 +33,12 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td> @Html.DisplayFor(modelItem => item.Id) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Cedula) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Name) </td>
-                                <td> @Html.DisplayFor(modelItem => item.Description) </td>
-                                <td> @Html.DisplayFor(modelItem => item.Category) </td>
-                                <td> @Html.DisplayFor(modelItem => item.Price) </td>
-                                <td> @Html.DisplayFor(modelItem => item.Existence) </td>
+                                <td> @Html.DisplayFor(modelItem => item.LastName) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Salary) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Position) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Telephone) </td>
                                 <td>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-simple btn-info btn-icon table-action view"><i class="ti-image"></i></a>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-simple btn-warning btn-icon table-action edit"><i class="ti-pencil-alt"></i></a>
