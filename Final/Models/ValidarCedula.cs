@@ -32,39 +32,42 @@ namespace Final.Models
                     //verificamos que la longitud del parametro sea igual a 11
                     if (longitud == 11)
                     {
-                        digitoVerificador = Convert.ToInt32(cedula.Substring(10, 1));
-                        //recorremos en un ciclo for cada dígito de la cédula
-                        for (int i = 9; i >= 0; i--)
+                        if ((int.Parse(cedula.Substring(0, 3)) < 122 && int.Parse(cedula.Substring(0, 3)) > 0 || int.Parse(cedula.Substring(0, 3)) == 402))
                         {
-                            //si el digito no es par multiplicamos por 2
-                            digito = Convert.ToInt32(cedula.Substring(i, 1));
-                            if ((i % 2) != 0)
+                            digitoVerificador = Convert.ToInt32(cedula.Substring(10, 1));
+                            //recorremos en un ciclo for cada dígito de la cédula
+                            for (int i = 9; i >= 0; i--)
                             {
-                                digitoImpar = digito * 2;
-                                //si el digito obtenido es mayor a 10, restamos 9
-                                if (digitoImpar >= 10)
+                                //si el digito no es par multiplicamos por 2
+                                digito = Convert.ToInt32(cedula.Substring(i, 1));
+                                if ((i % 2) != 0)
                                 {
-                                    digitoImpar = digitoImpar - 9;
+                                    digitoImpar = digito * 2;
+                                    //si el digito obtenido es mayor a 10, restamos 9
+                                    if (digitoImpar >= 10)
+                                    {
+                                        digitoImpar = digitoImpar - 9;
+                                    }
+                                    sumaImpar = sumaImpar + digitoImpar;
                                 }
-                                sumaImpar = sumaImpar + digitoImpar;
+                                /*En los demás casos sumamos el dígito y lo aculamos 
+                                 en la variable */
+                                else
+                                {
+                                    sumaPar = sumaPar + digito;
+                                }
                             }
-                            /*En los demás casos sumamos el dígito y lo aculamos 
-                             en la variable */
-                            else
+                            /*Obtenemos el verificador restandole a 10 el modulo 10 
+                            de la suma total de los dígitos*/
+                            verificador = 10 - ((sumaPar + sumaImpar) % 10);
+                            /*si el verificador es igual a 10 y el dígito verificador
+                              es igual a cero o el verificador y el dígito verificador 
+                              son iguales retorna verdadero*/
+                            if (((verificador == 10) && (digitoVerificador == 0))
+                                 || (verificador == digitoVerificador))
                             {
-                                sumaPar = sumaPar + digito;
+                                return ValidationResult.Success;
                             }
-                        }
-                        /*Obtenemos el verificador restandole a 10 el modulo 10 
-                        de la suma total de los dígitos*/
-                        verificador = 10 - ((sumaPar + sumaImpar) % 10);
-                        /*si el verificador es igual a 10 y el dígito verificador
-                          es igual a cero o el verificador y el dígito verificador 
-                          son iguales retorna verdadero*/
-                        if (((verificador == 10) && (digitoVerificador == 0))
-                             || (verificador == digitoVerificador))
-                        {
-                            return ValidationResult.Success;
                         }
                     }
                     else

@@ -65,7 +65,7 @@ namespace Final.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToAction("Index", "Manage");
+                    return RedirectToAction("Overview", "Manage");
                 }
                 if (result.RequiresTwoFactor)
                 {
