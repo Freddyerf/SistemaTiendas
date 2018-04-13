@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using Final.Models;
 using Final.Models.AccountViewModels;
 using Final.Services;
+using Final.Data;
+using Final.Models.Entities;
 
 namespace Final.Controllers
 {
@@ -20,17 +22,20 @@ namespace Final.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
 
         public AccountController(
+            ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -220,7 +225,16 @@ namespace Final.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name, LastName = model.LastName, Company = model.Company };
+                Company company = new Company();
+                company.Name = model.CompanyName;
+                company.Telephone = model.CompanyTelephone;
+                company.Address = model.CompanyAddress;
+                var companyResult =  _context.Companies.Add(company);
+                _context.SaveChanges();
+
+                var companyId = (from c in _context.Companies where c.Name == model.CompanyName select c).FirstOrDefault();
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name, LastName = model.LastName, CompanyId = companyId.Id};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

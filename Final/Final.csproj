@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-Final-1CC04441-7DFE-4699-89AC-C9A070F4E602</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180413041038_addingCompanies.cs" />
+    <Compile Remove="Data\Migrations\20180413094717_companies.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />

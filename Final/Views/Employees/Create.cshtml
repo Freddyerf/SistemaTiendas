@@ -8,6 +8,10 @@
     ViewData["EmployeeCollapsedIn"] = "in";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
 
 <div class="row">
 
@@ -19,11 +23,13 @@
             <div class="card-content">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="CompanyId" value="@user.CompanyId" />
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="Cedula" class="control-label"></label>
                                 <input asp-for="Cedula" class="form-control" />
+                                <span class="text-danger">@ViewData["CedulaRep"]</span>
                                 <span asp-validation-for="Cedula" class="text-danger"></span>
                             </div>
                         </div>

@@ -9,6 +9,10 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     string status = ViewBag.Status;
 }
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
 
 @Html.Partial("_StatusMessage", status)
 
@@ -22,6 +26,7 @@
             <div class="card-content">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="CompanyId" value="@user.CompanyId" />
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

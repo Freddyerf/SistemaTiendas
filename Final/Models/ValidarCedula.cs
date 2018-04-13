@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Final.Data;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Final.Models
 {
     public class ValidarCedula : ValidationAttribute
     {
-        
+        private readonly ApplicationDbContext context;
+
         public ValidarCedula() : base("La cédula es inválida")
         {
         }
@@ -16,7 +20,8 @@ namespace Final.Models
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             string cedula = Convert.ToString(value);
-            if(value != null)
+            var mensajeDeError = FormatErrorMessage(validationContext.DisplayName);
+            if (value != null)
             {
                 //Declaración de variables a nivel de método o función.
                 int verificador = 0;
@@ -32,6 +37,7 @@ namespace Final.Models
                     //verificamos que la longitud del parametro sea igual a 11
                     if (longitud == 11)
                     {
+
                         if ((int.Parse(cedula.Substring(0, 3)) < 122 && int.Parse(cedula.Substring(0, 3)) > 0 || int.Parse(cedula.Substring(0, 3)) == 402))
                         {
                             digitoVerificador = Convert.ToInt32(cedula.Substring(10, 1));
@@ -80,10 +86,10 @@ namespace Final.Models
                     //Console.WriteLine("No se pudo validar la cédula");
                 }
 
-                var mensajeDeError = FormatErrorMessage(validationContext.DisplayName);
+                
                 return new ValidationResult(mensajeDeError);
             }
-            return base.IsValid(value, validationContext);
+            return ValidationResult.Success;
         }
     }
 }

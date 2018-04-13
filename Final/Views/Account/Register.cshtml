@@ -5,55 +5,118 @@
 }
 
 <div class="content">
-    <div class="container">
+    <div class="container" style="padding-top:10%">
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="header-text">
-                    <h2>@ViewData["Title"]</h2>
-                    <h4>¡Regístrate y disfruta de nuestro panel de administrador gratis!</h4>
+                <div class="card card-wizard" id="wizardCard">
+                    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="wizardForm">  
+                        <div class="card-header text-center">
+                            <h4 class="card-title">@ViewData["Title"]</h4>
+                            <p class="category">Register and enjoy our awsome store manager for free!</p>
+                        </div>
+                        <div class="card-content">
+                            <ul class="nav">
+                                <li><a href="#tab1" data-toggle="tab">Your Company</a></li>
+                                <li><a href="#tab2" data-toggle="tab">Your Info</a></li>
+                                <li><a href="#tab3" data-toggle="tab">Finish</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                
+                                <div class="tab-pane" id="tab1">
+                                    <h5 class="text-center">Please fill in the corresponding information about your company.</h5>
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label asp-for="CompanyName" class="control-label"></label>
+                                                <input asp-for="CompanyName" class="form-control" placeholder="Enter the name of your company" />
+                                                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label asp-for="CompanyTelephone" class="control-label"></label>
+                                                <input asp-for="CompanyTelephone" class="form-control" placeholder="Your company telephone number" />
+                                                <span asp-validation-for="CompanyTelephone" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label asp-for="CompanyAddress" class="control-label"></label>
+                                                <input asp-for="CompanyAddress" class="form-control" placeholder="Enter your company's phisical address" />
+                                                <span asp-validation-for="CompanyAddress" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <h5 class="text-center">Please give us more details about yourself.</h5>
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label asp-for="Name" class="control-label"></label>
+                                                <input asp-for="Name" class="form-control" placeholder="Enter your first name" />
+                                                <span asp-validation-for="Name" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label asp-for="LastName" class="control-label"></label>
+                                                <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+                                                <span asp-validation-for="LastName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label asp-for="Email" class="control-label"></label>
+                                                <input asp-for="Email" class="form-control" placeholder="Enter your last E-mail address" />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label asp-for="Password" class="control-label"></label>
+                                                <input asp-for="Password" class="form-control" placeholder="Enter your password" />
+                                                <span asp-validation-for="Password" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label asp-for="ConfirmPassword" class="control-label"></label>
+                                                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm your password" />
+                                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab3">
+                                    <h2 class="text-center text-space">You're almost finished!<br><small>Click on "<b>Finish</b>" to register</small></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-default btn-fill btn-wd btn-back pull-left">Back</button>
+                            <button type="button" class="btn btn-info btn-fill btn-wd btn-next pull-right">Next</button>
+                            <button type="submit" class="btn btn-info btn-fill btn-wd btn-finish pull-right">Finish</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="col-md-4 col-md-offset-4">
-                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                    <div class="card card-plain">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="content">
-                            <div class="form-group">
-                                <input asp-for="Name" class="form-control" placeholder="Your First Name" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="LastName" class="form-control" placeholder="Your Last Name" />
-                                <span asp-validation-for="LastName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="Company" class="form-control" placeholder="Company"/>
-                                <span asp-validation-for="Company" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="Email" class="form-control" placeholder="Enter your Email" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="Password" class="form-control" placeholder="Password"/>
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm your password"/>
-                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="footer text-center">
-                            <button type="submit" class="btn btn-fill btn-social btn-wd">Create Free Account</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
+
+        
     </div>
 </div>
 
-
 @section Scripts {
     @await Html.PartialAsync("_ScriptsPartial")
+    @await Html.PartialAsync("_ManageScriptsPartial")
 }

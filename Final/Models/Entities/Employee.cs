@@ -9,6 +9,7 @@ namespace Final.Models.Entities
 {
     public class Employee
     {
+        
         public int Id { get; set; }
 
         [Required]
@@ -27,8 +28,12 @@ namespace Final.Models.Entities
         [Display(Name ="Phone number")]
         public string Telephone { get; set; }
 
+        [Required]
         [ValidarCedula]
         [MaxLength(13)]
         public string Cedula { get; set; }
+
+        public int CompanyId { get; set; }
+
     }
 }

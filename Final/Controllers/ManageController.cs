@@ -67,7 +67,6 @@ namespace Final.Controllers
                 Email = user.Email,
                 Name = user.Name,
                 LastName = user.LastName,
-                Company = user.Company,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
@@ -123,15 +122,15 @@ namespace Final.Controllers
                 user.LastName = model.LastName;
             }
 
-            var company = user.Company;
+            /*var company = user.Company;
             if (model.Company != company)
             {
-                /* var setEmailResult = await _userManager.SetEmailAsync(user, model.Company);
+                 var setEmailResult = await _userManager.SetEmailAsync(user, model.Company);
                  if (!setEmailResult.Succeeded)
                  {
                      throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
-                 }*/
-            }
+                 }
+            }*/
 
             var phoneNumber = user.PhoneNumber;
             if (model.PhoneNumber != phoneNumber)
@@ -533,12 +532,14 @@ namespace Final.Controllers
             return View(nameof(ShowRecoveryCodes), model);
         }
 
-        public IActionResult Overview()
+        public async Task<IActionResult> Overview()
         {
+            var user = await _userManager.GetUserAsync(User);
             var model = new OverviewViewModel
             {
-                CountProducts = _context.Products.Count() * _context.Products.Sum(p => p.Existence),
-                SumSalary = _context.Employees.Sum(e=> e.Salary)
+                CountProducts = (from p in _context.Products where p.CompanyId == user.CompanyId select p).Count() * 
+                (from p in _context.Products where p.CompanyId == user.CompanyId select p.Existence).Sum(),
+                SumSalary = (from s in _context.Employees where s.CompanyId == user.CompanyId select s.Salary).Sum()
             };
             return View(model);
         }

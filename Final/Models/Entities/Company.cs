@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace Final.Models.Entities
 {
-    public class Product
+    public class Company
     {
         public int Id { get; set; }
         [Required]
+        [StringLength(250)]
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Category { get; set; }
-        [Required]
-        public decimal Price { get; set; }
-        public int Existence { get; set; }
+        [StringLength(250)]
+        public string Address { get; set; }
+        [Phone]
+        [StringLength(20)]
+        public string Telephone { get; set; }
 
-        public int CompanyId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

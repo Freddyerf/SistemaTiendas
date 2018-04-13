@@ -1,8 +1,17 @@
 ﻿@model IndexViewModel
+@using Final.Data
 @{
     ViewData["Title"] = "Profile";
     ViewData.AddActivePage(ManageNavPages.Index);
     Layout = "_LayoutAdmin";
+}
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+@inject ApplicationDbContext _context
+@{
+    var _company = (from c in _context.Companies where c.Id == user.CompanyId select c).FirstOrDefault();
 }
 
 @Html.Partial("_StatusMessage", Model.StatusMessage)
@@ -20,8 +29,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="Company"></label>
-                                <input asp-for="Company" class="form-control border-input" placeholder="Company" disabled />
+                                <label>Company</label>
+                                <input value="@_company.Name" class="form-control border-input" placeholder="Company" disabled />
                             </div>
                         </div>
                         <div class="col-md-6">

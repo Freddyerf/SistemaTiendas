@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Final.Data;
 using Final.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Final.Models;
 
 namespace Final.Controllers
 {
@@ -15,16 +17,19 @@ namespace Final.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            var companyId = _userManager.GetUserAsync(User);
+            return View(await _context.Products.Where(p=>p.CompanyId==companyId.Id).ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -56,7 +61,7 @@ namespace Final.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Category,Price,Existence")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Category,Price,Existence,CompanyId")] Product product)
         {
             if (ModelState.IsValid)
             {

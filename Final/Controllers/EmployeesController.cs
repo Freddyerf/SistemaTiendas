@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Final.Data;
 using Final.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Final.Models;
 
 namespace Final.Controllers
 {
@@ -15,16 +17,19 @@ namespace Final.Controllers
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public EmployeesController(ApplicationDbContext context)
+        public EmployeesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            var companyId = _userManager.GetUserAsync(User);
+            return View(await _context.Employees.Where(e=>e.CompanyId==companyId.Id).ToListAsync());
         }
 
         // GET: Employees/Details/5
@@ -56,13 +61,20 @@ namespace Final.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,LastName,Salary,Position,Telephone,Cedula")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,Name,LastName,Salary,Position,Telephone,Cedula,CompanyId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employee);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if(_context.Employees.Any(e=>e.Cedula == employee.Cedula && e.CompanyId == employee.CompanyId))
+                {
+                    ViewData["CedulaRep"] = "No duplicates allowed";
+                }else
+                {
+                    _context.Add(employee);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                
             }
             return View(employee);
         }
@@ -145,6 +157,13 @@ namespace Final.Controllers
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Paysheet
+        public async Task<IActionResult> Paysheet()
+        {
+            var companyId = _userManager.GetUserAsync(User);
+            return View(await _context.Employees.Where(e => e.CompanyId == companyId.Id).ToListAsync());
         }
 
         private bool EmployeeExists(int id)

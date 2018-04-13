@@ -17,8 +17,6 @@ namespace Final.Models.ManageViewModels
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        public string Company { get; set; }
-
         [Required]
         [EmailAddress]
         public string Email { get; set; }
