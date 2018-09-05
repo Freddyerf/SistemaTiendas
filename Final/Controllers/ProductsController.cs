@@ -28,8 +28,8 @@ namespace Final.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var companyId = _userManager.GetUserAsync(User);
-            return View(await _context.Products.Where(p=>p.CompanyId==companyId.Id).ToListAsync());
+            var userId = _context.Users.FirstOrDefault(u => u.Email == User.Identity.Name);
+            return View(await _context.Products.Where(p=>p.CompanyId==userId.CompanyId).ToListAsync());
         }
 
         // GET: Products/Details/5

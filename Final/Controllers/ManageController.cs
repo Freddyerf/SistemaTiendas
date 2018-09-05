@@ -37,8 +37,9 @@ namespace Final.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder,
-          IDataTray dataTray)
+          UrlEncoder urlEncoder
+         // IDataTray dataTray
+            )
         {
             _context = context;
             _userManager = userManager;
@@ -46,7 +47,7 @@ namespace Final.Controllers
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
-            _dataTray = dataTray;
+         //   _dataTray = dataTray;
         }
 
         [TempData]
@@ -553,7 +554,7 @@ namespace Final.Controllers
         {
             var model = new StockViewModel
             {
-                Products = _dataTray.GetProducts()
+                Products = _context.Products
             };
             return View(model);
         }
